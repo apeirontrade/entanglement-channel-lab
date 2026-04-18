@@ -44,9 +44,59 @@ Hardware: Amazon Braket LocalSimulator (classical simulator on `ml.t3.medium`)
 - Early hint of teleport-advantage under dephasing at low shots was **Monte Carlo noise**, not real signal.
 - Consistent with textbook theory: entanglement does not buy noise resistance for symmetric single-qubit Pauli noise with a generic encoding.
 
-## 03 — Variational encoding
+## 03 — Variational encoding (via Braket — ABANDONED)
 
-(fill in once the script finishes running)
+The simulator-based version hit a performance issue: each `device.run(...)` call
+triggered a pydantic v1 schema re-validation (a `StrRegexError` over the `ctrl`
+modifier regex, caught and retried internally) on every shot. With differential
+evolution calling the transmission loop ~24 times per noise type × 400 shots each,
+the full 6-row sweep projected to hours. Only one row completed:
+
+```
+depolarizing_15        θ=(4.69, 5.79, 3.59)    F_opt=0.932    F_naive=0.915    Δ=+0.017
+```
+
+The +1.7 % advantage on depolarizing noise is within one standard error of zero
+(SE ≈ 1.3 % at 400 shots) — consistent with theory that depolarizing noise has
+no preferred encoding direction.
+
+We pivoted to the analytic version (below), which is orders of magnitude faster
+and sidesteps the simulator overhead entirely.
+
+## 04 — Analytic variational encoding
+
+Closed-form fidelity for single-qubit Pauli noise with Bloch-sphere encoding
+(α, β):
+
+    F(α, β) = (1 − p_x − p_y − p_z)
+            + p_x sin²α cos²β + p_y sin²α sin²β + p_z cos²α
+
+Optimized with SciPy differential evolution across 9 noise panels:
+
+| noise              | α      | β      | F_opt | F_naive | Δ       | axis               |
+|--------------------|--------|--------|-------|---------|---------|--------------------|
+| depolarizing       | 2.53   | 2.00   | 0.900 | 0.900   | +0.000  | rotationally symm  |
+| bit_flip_25        | π/2    | π      | 1.000 | 0.750   | +0.250  | X-axis (&#124;+⟩ / &#124;−⟩)  |
+| phase_flip_25      | π      | any    | 1.000 | 1.000   |  0.000  | Z-axis (&#124;1⟩, naive≈optimal) |
+| Y_only_25          | π/2    | 3π/2   | 1.000 | 0.750   | +0.250  | Y-axis (&#124;+i⟩/&#124;−i⟩)  |
+| biased_bit_heavy   | π/2    | π      | 0.960 | 0.730   | +0.230  | X-axis             |
+| biased_phase_heavy | π      | *      | 0.960 | 0.960   |  0.000  | Z-axis             |
+| XY_equal           | π/2    | π/2-ish| 0.850 | 0.700   | +0.150  | Y-axis (off-axis)  |
+| XZ_equal           | π      | π      | 0.850 | 0.850   |  0.000  | Z-axis             |
+| YZ_equal           | π      | 3π/2   | 0.850 | 0.850   |  0.000  | Z-axis             |
+
+### Interpretation
+
+In every case the discovered optimum matches the textbook-predicted Pauli
+eigenstate for the dominant error:
+
+* pure X noise → encode along X (|+⟩ / |−⟩), invariant under X
+* pure Y noise → encode along Y (|+i⟩ / |−i⟩), invariant under Y
+* pure Z noise → encode along Z (|0⟩ / |1⟩) — matches naive
+* depolarizing → no preferred direction, Δ = 0 (as required)
+
+This serves as a validation of the variational-encoding-discovery method on the
+smallest case where theory is known analytically.
 
 ## Takeaways
 
