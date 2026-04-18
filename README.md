@@ -30,13 +30,18 @@ That's the boring-but-correct answer: the "magic" of entanglement buys you topol
 notebooks/
   01_teleport_basic.py           # smallest working teleportation circuit
   02_channel_duality.py          # T vs D vs S under depolarizing + dephasing
+  02_full_channel_duality.py     # longer/commented original version with
+                                 # run helpers + crossover interpolation
   03_variational_encoding.py     # discover optimal encoding per noise type
 results/
-  channel_duality.png            # two-panel fidelity plot
-  encoding_discovery.png         # learned-encoding scatter
+  channel_duality.png            # two-panel fidelity plot (saved by script)
+  encoding_discovery.png         # learned-encoding scatter (saved by script)
 docs/
-  NOTES.md                       # raw observations & things that surprised us
   RESULTS.md                     # final numbers + interpretation
+  TRANSCRIPT.md                  # raw output from the actual notebook runs
+  RUNBOOK.md                     # step-by-step reproduction guide
+  NOTES.md                       # surprises, gotchas, follow-ups
+  JOURNEY.md                     # why each decision was made
 ```
 
 ## How to run
