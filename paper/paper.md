@@ -39,7 +39,7 @@ Honest ordering of all experimental results from the 2026-04-18 session.
 | 7 | **Variational rediscovery of Pauli-eigenstate optima** for single-qubit bit/phase/depolarising noise | textbook | exact | §3, 4 below |
 | 8 | **AME(8, 4) null result**: a 3-layer brick-wall SU(16) variational ansatz on 8 ququarts converges to objective ≈12, far from the AME target of 0 | honest null on a curated open problem (IQOQI #35); one more data point on the 'probably doesn't exist' pile | single ansatz, single restart | `docs/AME_NULL_RESULT.md` |
 | 9 | **Teleportation / superdense / direct transmission fidelity curves under noise**: teleport ≈ direct; superdense decays faster (4-outcome decoding is more fragile) | textbook | strong (11 noise points × 1500 shots) | `docs/RESULTS.md` |
-| 10 | **Real-hardware QPU characterisation** of IQM Garnet (12 tasks: 5 GHZ preparations, 4 CHSH settings, 3 crosstalk probes) | empirically novel snapshot of a specific device at a specific time, not physics-novel | PENDING — submitted 19:39 MST 2026-04-18, results incomplete | to be added |
+| 10 | **Real-hardware QPU characterisation** of IQM Garnet (12 tasks: 5 GHZ preparations, 4 CHSH settings, 3 crosstalk probes) | would have been empirically novel snapshot of a device at a specific time | CANCELLED — submitted 19:39 MST 2026-04-18; hardware run did not complete, cancelled by user | N/A |
 
 ## 1. Introduction
 
@@ -319,8 +319,10 @@ Notebooks 12 (Mermin), 13 (CHSH), and 17 (unified 12-circuit Garnet
 characterisation) are committed as reproducible code. The local
 simulator versions produce the expected ideal quantum results
 (|M| = 4, S = 2√2, F_GHZ = 1). Real-QPU submissions to IQM Garnet were
-submitted but results were not available at the time of this paper
-version; they will be reported in a follow-up commit.
+submitted at 19:39 MST 2026-04-18 but the hardware run did not complete
+in a reasonable time; the tasks were cancelled by the user. The code
+remains in the repo as a reproducible template if anyone (including
+the author) wants to re-submit later when queue times are favourable.
 
 ## 9. Correction
 
