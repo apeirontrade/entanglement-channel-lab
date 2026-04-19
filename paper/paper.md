@@ -226,6 +226,83 @@ https://github.com/apeirontrade/entanglement-channel-lab
 Run instructions are in `docs/RUNBOOK.md`. Python 3.12, `numpy`, `scipy`,
 `matplotlib`, `scikit-learn` required; no GPU needed.
 
+## 8. Additional weekend experiments
+
+Beyond the primary single-qubit and 2-qubit variational encoding results
+(§2–§5), the session produced several related small experiments in the
+same workspace. These are summarized here with pointers to their full
+writeups.
+
+### 8.1 Fractal quantum walks (notebook 10)
+
+Darázs et al. (*Phys. Rev. E* 90, 032113, 2014) showed that for
+continuous-time quantum walks on fractal graphs the spectral dimension
+`d_s` does not determine the return-probability decay exponent alpha,
+but did not propose a second invariant. We tested four candidate
+invariants on 8 graphs (Sierpinski gasket gen 2/3, T-fractal gen 2/3,
+Vicsek, Cayley b=3, b=4, ring). Raw correlations with alpha:
+
+| feature          | r(alpha, feature) |
+|------------------|------------------:|
+| d_s              |            +0.07 |
+| branching_ratio  |            +0.32 |
+| mean_chem_dist   |            −0.44 |
+| spectral_gap     |            +0.39 |
+| **mean_degree**  |        **−0.58** |
+| N                |            −0.20 |
+
+Residual correlation of mean_degree with alpha after regressing out d_s:
+−0.60, effectively unchanged, indicating mean_degree carries information
+orthogonal to d_s. With only 8 graphs this is preliminary; scaling to
+30–50 graphs with controlled d_s would be needed before any claim that
+mean_degree is a universal second invariant.
+
+See `docs/FRACTAL_WALKS.md`.
+
+### 8.2 Measurement-induced phase transition at small L (notebook 14)
+
+We ran the MIPT (Li-Fisher-Chen 2018, Skinner-Ruhman-Nahum 2019) at L =
+4, 5, 6, 7, 8 with random Haar brick-wall circuits, depth T = 2L,
+40 trajectories per (L, p) pair. Normalised entropy S/L curves cross
+in the range p ≈ 0.15–0.20, consistent with the published asymptotic
+value p_c ≈ 0.17. Serves as a small-L reference point; 40 trajectories
+is below the threshold for clean critical-exponent extraction.
+
+See `docs/MIPT_SMALL_L.md`.
+
+### 8.3 MIPT architecture comparison (notebook 15)
+
+Extended notebook 14 to compare three circuit ensembles: Haar, Clifford,
+and matchgate, at L = 6 and 8 with 100 trajectories. Haar and Clifford
+overlap within noise (consistent with same universality class); matchgate
+shows visibly different S/L scaling, with slower decay and a later
+transition. Consistent with Jian-You-Vasseur-Ludwig 2020 prediction
+that matchgate/free-fermion circuits belong to a distinct universality
+class.
+
+See `docs/MIPT_ARCHITECTURES.md`.
+
+### 8.4 Variational search for AME(8,4) (notebook 11)
+
+Attempt on IQOQI Open Problem #35. A 3-layer brick-wall 2-body SU(16)
+ansatz (1,320 real parameters) on 8 ququarts failed to find any input
+with the AME property; L-BFGS-B converged toward an objective value of
+≈0.14 (the AME threshold is 0.0, and a random Gaussian pure state
+achieves ≈0.004 on our objective). This is an honest null: our ansatz
+is likely too shallow, or AME(8, 4) may not exist. Aligns with AME(8,4)
+being one of the smallest unresolved cases on the problem page.
+
+See `docs/AME_NULL_RESULT.md`.
+
+### 8.5 Real-hardware characterisation (notebooks 12–13, 17)
+
+Notebooks 12 (Mermin), 13 (CHSH), and 17 (unified 12-circuit Garnet
+characterisation) are committed as reproducible code. The local
+simulator versions produce the expected ideal quantum results
+(|M| = 4, S = 2√2, F_GHZ = 1). Real-QPU submissions to IQM Garnet were
+submitted but results were not available at the time of this paper
+version; they will be reported in a follow-up commit.
+
 ## 9. Correction
 
 An earlier draft of this paper (v0.1, committed 2026-04-18 afternoon)
@@ -240,7 +317,7 @@ novelty claim. The numerical variational pipeline and the three-family
 comparison remain useful as a reproducible pedagogical illustration of a
 known theorem, and the authors acknowledge the error of prior omission.
 
-## 10. Acknowledgements
+## 11. Acknowledgements
 
 Developed conversationally with an LLM assistant (Anthropic Claude). Errors
 are my own. The MLP+encoding framing was proposed during iteration;
