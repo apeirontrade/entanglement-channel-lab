@@ -1,7 +1,89 @@
+# Python build artifacts
 __pycache__/
 *.pyc
-.ipynb_checkpoints/
-.DS_Store
-.env
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
 venv/
 .venv/
+env/
+.env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+.jupyter/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================================
+# SECURITY: never commit secrets or credentials
+# ============================================================
+# Environment / dotenv files (commonly hold API keys)
+.env
+.env.*
+!.env.example          # allow template file if you create one
+
+# Cloud credentials
+.aws/
+.aws-credentials
+credentials
+credentials.json
+config.json
+*.credentials
+
+# SSH keys / TLS certs
+*.pem
+*.key
+*.p12
+*.pfx
+*.cer
+*.crt
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+id_ecdsa
+id_ecdsa.*
+id_dsa
+id_dsa.*
+known_hosts
+authorized_keys
+
+# Token / secret file patterns
+*secret*
+*_secret*
+secrets.yaml
+secrets.yml
+secrets.toml
+secrets.json
+auth.json
+token.txt
+*.token
+
+# API key drop files
+api_keys.txt
+api_keys.json
+.apikey
+
+# Braket / AWS task output caches
+braket_output/
+braket-output/
+
+# Local IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OpenClaw workspace-local state (belt and suspenders)
+.openclaw/
