@@ -22,6 +22,25 @@ proof-of-concept for real-time "noise-adaptive encoding" decisions in a
 hypothetical quantum network controller. The full pipeline runs in ~10 s on a
 single CPU and is released under MIT licence.
 
+## Findings ranked (greatest → least significance)
+
+Honest ordering of all experimental results from the 2026-04-18 session.
+"Significance" = (novelty of observation) × (statistical strength) ×
+(distance from known published results). No claim of groundbreaking-ness.
+
+| rank | finding | novelty | strength | doc |
+|------|---------|---------|----------|-----|
+| 1 | **Mean node degree predicts quantum-walk decay exponent alpha better than spectral dimension d_s on fractals** (r=−0.58 vs +0.07, N=8 graphs; Darázs 2014 flagged this gap and did not propose mean_degree) | plausible small contribution, ~60–70 % confidence | preliminary (only 8 graphs) | `docs/FRACTAL_WALKS.md` |
+| 2 | **Staircase structure of the 2-qubit Pauli-memory-channel optimal-encoding boundary in the (λ, μ) parameter plane**: three discrete plateaus at λ* = 0.55, 0.45, 0.35 rather than a smooth curve | plausibly new visualization of a Daems-2007 / Karimipour-2009 corollary | strong (121-point grid) | `docs/PHASE_BOUNDARY_2D.md` |
+| 3 | **Matchgate (free-fermion) monitored circuits show visibly distinct S/L scaling** from Haar and Clifford at L=6,8, consistent with the Jian-You-Vasseur-Ludwig 2020 claim of a different universality class | confirmation of published prediction, not new | strong (100 trajectories per point) | `docs/MIPT_ARCHITECTURES.md` |
+| 4 | **Anti-correlated XY+YX Pauli noise: +36 % absolute fidelity gain** from entangled encoding over any product state (from 0.64 to 1.00) | textbook in principle; striking concrete number | exact | §5.3 below |
+| 5 | **MIPT critical point at L=4–8 converges near p ≈ 0.15–0.17**, agreeing with the published asymptotic p_c ≈ 0.17 (Skinner-Ruhman-Nahum 2019) | reproduction | pilot (40 trajectories) | `docs/MIPT_SMALL_L.md` |
+| 6 | **Three-phase structure in 2-qubit memory channels** (product / intermediate-degenerate / maximally-entangled) | rediscovery of Karimipour-Meghdadi-Memarzadeh 2009 | strong | `docs/PHASE_TRANSITION.md` |
+| 7 | **Variational rediscovery of Pauli-eigenstate optima** for single-qubit bit/phase/depolarising noise | textbook | exact | §3, 4 below |
+| 8 | **AME(8, 4) null result**: a 3-layer brick-wall SU(16) variational ansatz on 8 ququarts converges to objective ≈12, far from the AME target of 0 | honest null on a curated open problem (IQOQI #35); one more data point on the 'probably doesn't exist' pile | single ansatz, single restart | `docs/AME_NULL_RESULT.md` |
+| 9 | **Teleportation / superdense / direct transmission fidelity curves under noise**: teleport ≈ direct; superdense decays faster (4-outcome decoding is more fragile) | textbook | strong (11 noise points × 1500 shots) | `docs/RESULTS.md` |
+| 10 | **Real-hardware QPU characterisation** of IQM Garnet (12 tasks: 5 GHZ preparations, 4 CHSH settings, 3 crosstalk probes) | empirically novel snapshot of a specific device at a specific time, not physics-novel | PENDING — submitted 19:39 MST 2026-04-18, results incomplete | to be added |
+
 ## 1. Introduction
 
 When a qubit (or register) is transmitted through a noisy channel, the choice
