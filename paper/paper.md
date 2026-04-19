@@ -42,10 +42,17 @@ for correlated noise are less standard, and
 from a modest training set.
 
 **Scope statement.** The single-qubit results replicate textbook theory
-(Nielsen & Chuang, Chs. 8–12). The 2-qubit results validate well-known folklore
-about entanglement and correlated noise. Neither is a new theoretical finding;
-the contribution is an implementation-first, self-contained framework suitable
-for pedagogy and as a scaffold for research extensions.
+(Nielsen & Chuang, Chs. 8–12). The 2-qubit correlated-noise results
+numerically reproduce a theorem of Daems [*Phys. Rev. A* 76, 012310 (2007);
+arXiv:quant-ph/0610165]: for two uses of a general Pauli memory channel, the
+classical capacity is achieved by a maximally entangled state above a memory
+threshold and by a specific product state below it. An earlier conjecture for
+the depolarizing case was made by Macchiavello and Palma [*Phys. Rev. A* 65,
+050301(R) (2002)]. Our contribution is an implementation-first, self-contained
+variational framework that rediscovers both the single-qubit Pauli-eigenstate
+optima and the Daems transition numerically, with no analytical input; it is
+suitable for pedagogy and as a scaffold for research extensions to N ≥ 3
+qubits where exact results are less complete.
 
 ## 2. Background
 
@@ -219,7 +226,21 @@ https://github.com/apeirontrade/entanglement-channel-lab
 Run instructions are in `docs/RUNBOOK.md`. Python 3.12, `numpy`, `scipy`,
 `matplotlib`, `scikit-learn` required; no GPU needed.
 
-## 9. Acknowledgements
+## 9. Correction
+
+An earlier draft of this paper (v0.1, committed 2026-04-18 afternoon)
+described the three-family phase-transition observation in §5 as
+"not, to our knowledge, stated in this exact form in the literature"
+and used the language of a novel "Type 0 / I / II taxonomy." A post hoc
+literature search identifies Daems (2007), arXiv:quant-ph/0610165, which
+proves exactly the product→entangled transition theorem for two-use Pauli
+memory channels, generalizing an earlier depolarizing-case conjecture by
+Macchiavello and Palma (2002). This v0.2 draft corrects the overstated
+novelty claim. The numerical variational pipeline and the three-family
+comparison remain useful as a reproducible pedagogical illustration of a
+known theorem, and the authors acknowledge the error of prior omission.
+
+## 10. Acknowledgements
 
 Developed conversationally with an LLM assistant (Anthropic Claude). Errors
 are my own. The MLP+encoding framing was proposed during iteration;
@@ -231,15 +252,24 @@ I (the human) drove the scope, sign-offs, and pivots.
 
 1. M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum
    Information* (10th anniv. ed.), Cambridge (2010) — Chs. 8, 12.
-2. C. H. Bennett, P. W. Shor, J. A. Smolin, A. V. Thapliyal, "Entanglement-
-   assisted classical capacity of noisy quantum channels", Phys. Rev. Lett.
-   83, 3081 (1999).
-3. C. H. Bennett, G. Brassard, C. Crépeau, R. Jozsa, A. Peres, W. K. Wootters,
+2. **D. Daems**, "Entanglement-enhanced classical capacity of two-qubit
+   quantum channels with memory: the exact solution", *Phys. Rev. A* **76**,
+   012310 (2007); arXiv:quant-ph/0610165. — directly proves the
+   product→entangled transition theorem our numerical pipeline rediscovers.
+3. **C. Macchiavello and G. M. Palma**, "Entanglement-enhanced information
+   transmission over a quantum channel with correlated noise", *Phys. Rev. A*
+   **65**, 050301(R) (2002). — earlier conjecture for the depolarizing
+   two-use case.
+4. Z. Shadman, H. Kampermann, C. Macchiavello, D. Bruß, "Optimal super
+   dense coding over memory channels", *Phys. Rev. A* **84**, 042309 (2011);
+   arXiv:1107.3591. — related followup on memory-channel super-dense coding.
+5. C. H. Bennett, P. W. Shor, J. A. Smolin, A. V. Thapliyal,
+   "Entanglement-assisted classical capacity of noisy quantum channels",
+   *Phys. Rev. Lett.* **83**, 3081 (1999).
+6. C. H. Bennett, G. Brassard, C. Crépeau, R. Jozsa, A. Peres, W. K. Wootters,
    "Teleporting an unknown quantum state via dual classical and
-   Einstein–Podolsky–Rosen channels", Phys. Rev. Lett. 70, 1895 (1993).
-4. C. H. Bennett and S. J. Wiesner, "Communication via one- and two-particle
-   operators on Einstein–Podolsky–Rosen states", Phys. Rev. Lett. 69, 2881
-   (1992).
-5. K. Cranmer, J. Brehmer, G. Louppe, "The frontier of simulation-based
-   inference", PNAS 117 (2020) — for the machine-learning-for-physics frame.
-6. Amazon Braket SDK documentation, https://aws.amazon.com/braket/
+   Einstein–Podolsky–Rosen channels", *Phys. Rev. Lett.* **70**, 1895 (1993).
+7. C. H. Bennett and S. J. Wiesner, "Communication via one- and two-particle
+   operators on Einstein–Podolsky–Rosen states", *Phys. Rev. Lett.* **69**,
+   2881 (1992).
+8. Amazon Braket SDK documentation, https://aws.amazon.com/braket/

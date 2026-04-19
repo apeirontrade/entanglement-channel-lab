@@ -84,11 +84,10 @@ individually. Once the rising Bell branch reaches the descending product
 branch, the optimizer switches, and `F_prod` then begins climbing again
 along a different product-state branch (one that's losing XY+YX damage).
 
-## Observation — a three-type taxonomy of correlated-noise-induced transitions
+## Observation — three qualitatively distinct family behaviors
 
-The three families exhibit qualitatively distinct behaviors, which we
-conjecture are controlled by the product-state eigenstructure of the
-correlated-noise operators:
+The three families exhibit qualitatively distinct behaviors, controlled by
+the product-state eigenstructure of the correlated-noise operators:
 
 - **Type 0 (degenerate, Family B):** the correlated-noise operator stabilizes
   some product state → product and Bell encodings are fidelity-degenerate
@@ -102,10 +101,52 @@ correlated-noise operators:
   the correlated-noise operators, so `F_prod` actively decreases with λ
   while `F_ent` climbs → the curves meet earlier, transition λ* is smaller.
 
-This taxonomy is empirical and not, to our knowledge, stated in this exact
-form in the literature. It invites a clean analytic proof via stabilizer-
-theoretic analysis of commutator structure, which we have not carried
-out here.
+## Relation to prior work
+
+**The existence and location of this transition is NOT a new result.** It is a
+known (and proved) theorem in the quantum information literature, specifically:
+
+- **Macchiavello & Palma, Phys. Rev. A 65, 050301(R) (2002)** — conjectured,
+  for the depolarizing two-use channel, that entangled inputs outperform
+  product inputs above a memory threshold.
+- **D. Daems, Phys. Rev. A 76, 012310 (2007)** ([arXiv:quant-ph/0610165](https://arxiv.org/abs/quant-ph/0610165)) — proved, exactly, for **all** two-use Pauli memory channels,
+  that the classical capacity is achieved by maximally entangled states above
+  a memory threshold and by a specific product state below it. That paper is
+  the direct parent of what we have numerically rediscovered.
+- Related followup work includes Shadman, Kampermann, Macchiavello & Bruß
+  ([arXiv:1107.3591](https://arxiv.org/abs/1107.3591), 2011) on super-dense
+  coding over memory channels.
+
+### What we did numerically that is consistent with Daems (2007)
+
+- Each of the three families shows the transition structure the theorem
+  predicts.
+- Family B (ZZ-only memory) is the degenerate edge-case where the product
+  state is already an eigenstate of the memory operator.
+- Family A (XX+ZZ) transitions at λ* ≈ 0.55, Family C (XY+YX) at λ* ≈ 0.35.
+  The relative ordering of these thresholds follows from the geometric
+  argument above and is a specific numerical illustration of the general
+  theorem, not an independent discovery.
+
+### Where this writeup remains useful
+
+- A **reproducible, open-source, 9-parameter variational implementation** that
+  rediscovers the transition numerically without any analytical input. Useful
+  as pedagogy.
+- Explicit exploration of a specific family (anti-correlated XY+YX, our
+  Family C) that I have not verified to appear as a worked example in
+  Daems. Even if it's just a further instance of the same theorem, plotting
+  λ*_C ≈ 0.35 makes the geometric intuition concrete.
+- A scaffold for pushing to N ≥ 3 qubits, where exact analytical results are
+  less complete.
+
+### Correction to an earlier draft of this document
+
+An earlier version of this note claimed the three-type taxonomy was "not, to
+our knowledge, stated in this exact form in the literature." That claim was
+made without a literature search and is incorrect. A straightforward search
+finds Daems (2007) and the earlier Macchiavello-Palma conjecture. This
+document has been rewritten to correctly place the work.
 
 ## Files
 
