@@ -1,12 +1,17 @@
 # Entanglement-Assisted Channel Lab
 
-A weekend experiment comparing three ways to send information between Alice and Bob under noise, plus a set of follow-on quantum-info explorations.
+An independent study comparing three ways to send information between Alice and Bob under noise, plus a set of follow-on quantum-information explorations — 19 experiments in total.
 
 - **Direct** – just send the thing (baseline, no entanglement)
 - **Teleportation** – consume a Bell pair + 2 classical bits to send 1 qubit
 - **Superdense coding** – consume a Bell pair + 1 qubit to send 2 classical bits
 
 Runs on **Amazon Braket** (local simulator — zero compute cost).
+
+> **On hardware:** the real-QPU scripts in this repo were written and the circuits were
+> provisioned and submitted to **IQM Garnet**, but the hardware run did not complete and was
+> cancelled. **Every result reported here comes from the Braket LocalSimulator.** No hardware
+> results are claimed.
 
 ## TL;DR
 
